@@ -88,6 +88,16 @@ class Contenedor{
             return console.log('No hay artículos')
         }
     }
+
+    leerArchivo(){
+        this.fs.promises.readFile('./productos.txt', 'utf-8')
+        .then(contenido =>{
+            console.log(contenido)
+        })
+        .catch( err =>{
+            console.log('Error de lectura ', err)
+        })
+    }
 }
 
 let producto1 =  {
@@ -114,21 +124,40 @@ let cont = new Contenedor('productos.txt');
 cont.save(producto1);
 cont.save(producto2);
 cont.save(producto3);
-
 //Obtener todos los productos
-console.log('OBTENGO LOS PRODUCTOS DESPUES DE GUARDARLOS: ');
-console.log(cont.getAll());
+setTimeout(() => {
+    console.log('OBTENGO LOS PRODUCTOS DESPUES DE GUARDARLOS: ');
+    console.log(cont.getAll());
+    console.log('Leo directamente el archivo:')
+    cont.leerArchivo();
+}, 1000);
+
+
 
 //Comprobar busqueda por ID
-cont.getById(2);
-cont.getById(6);
+setTimeout(() => {
+    console.log('Obtengo un producto buscado por Id:')
+    cont.getById(2);
+    cont.getById(6);
+}, 3000);
+
+
 
 //Eliminar un elemento
-cont.deleteById(2)
-console.log('Obtengo los productos luego de eliminar uno:');
-console.log(cont.getAll());
+setTimeout(() => {
+    cont.deleteById(2)
+    console.log('Obtengo los productos luego de eliminar uno:');
+    console.log(cont.getAll());
+    console.log('Leo directamente el archivo:')
+    cont.leerArchivo();
+}, 5000);
+
 
 //Eliminar todos los artículos
-cont.deleteAll()
-console.log('Obtengo los productos luego de eliminarlos a todos:');
-console.log(cont.getAll());
+setTimeout(() => {
+    cont.deleteAll()
+    console.log('Obtengo los productos luego de eliminarlos a todos:');
+    console.log(cont.getAll());
+    console.log('Leo directamente el archivo:')
+    cont.leerArchivo();
+}, 7000);
